@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { OMDB_API_KEY } from "../components/API_KEY";
 
@@ -8,29 +8,67 @@ function useQuery() {
 }
 
 function Home() {
-  const [movie, setMovie] = useState();
+  const [englishTitle, setEnglishTitle] = useState();
+  const [originalTitle, setOriginalTitle] = useState();
+  const [movieData, setMovieData] = useState();
+  const [movieStats, setMovieStats] = useState();
+
   let query = useQuery();
 
-  //   const studioGhibliURL = `https://ghibliapi.herokuapp.com/films?name=${movie}`;
-  const studioGhibliURL = `https://ghibliapi.herokuapp.com/films?title=Castle in the Sky`;
-  const omdbURL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&t=Tenkū+no+shiro+Rapyuta`;
+  const studioGhibliURL = `https://ghibliapi.herokuapp.com/films?title=${englishTitle}`;
+  const omdbURL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&t=${originalTitle}`;
 
   useEffect(() => {
-    if (!movie) {
+    const movieTitle = query.get("movie");
+    setEnglishTitle(movieTitle);
+  }, [query]);
+
+  useEffect(() => {
+    axios
+      .get(studioGhibliURL)
+      .then(function (response) {
+        setMovieData(response.data);
+        setOriginalTitle(response.data[0].original_title_romanised);
+      })
+      .catch(function (error) {
+        // handle error
+      });
+  }, [studioGhibliURL, englishTitle]);
+
+  useEffect(() => {
+    if (originalTitle) {
       axios
         .get(omdbURL)
         .then(function (response) {
-          console.log(response.data);
+          setMovieStats(response.data);
         })
         .catch(function (error) {
-          console.warn(error);
+          // handle error
         });
     }
-  });
+  }, [omdbURL, originalTitle]);
+
   return (
-    <div>
-      <p>Home</p>
-    </div>
+    <main>
+      <h1>GHIBLI MOVIES</h1>
+      <section>
+        <a href="/?movie=My Neighbor Totoro">
+          <img src="movie1.png" alt="My Neighbor Totoro"></img>
+        </a>
+
+        <a href="/?movie=Spirited Away">
+          <img src="movie2.png" alt="Spirited Away"></img>
+        </a>
+
+        <a href="/?movie=Princess Mononoke">
+          <img src="movie3.png" alt="Princess Mononoke"></img>
+        </a>
+
+        <a href="/?movie=Castle in the Sky">
+          <img src="movie4.png" alt="Castle in the Sky"></img>
+        </a>
+      </section>
+    </main>
   );
 }
 
