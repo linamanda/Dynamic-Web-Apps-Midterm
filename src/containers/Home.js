@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import MovieCard from "../components/MovieCard";
 import { OMDB_API_KEY } from "../components/API_KEY";
 
 function useQuery() {
@@ -48,26 +49,59 @@ function Home() {
     }
   }, [omdbURL, originalTitle]);
 
+  const { engTitle, japTitle, description, poster, ratings } = useMemo(() => {
+    if (!movieStats) return {};
+    return {
+      engTitle: movieData[0].title,
+      japTitle: movieData[0].original_title_romanised,
+      description: movieData[0].description,
+      poster: movieStats.Poster,
+      ratings: movieStats.Ratings,
+    };
+  });
+
   return (
     <main>
       <h1>GHIBLI MOVIES</h1>
       <section>
         <a href="/?movie=My Neighbor Totoro">
-          <img src="movie1.png" alt="My Neighbor Totoro"></img>
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BYzJjMTYyMjQtZDI0My00ZjE2LTkyNGYtOTllNGQxNDMyZjE0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+            alt="My Neighbor Totoro"
+          ></img>
         </a>
 
         <a href="/?movie=Spirited Away">
-          <img src="movie2.png" alt="Spirited Away"></img>
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+            alt="Spirited Away"
+          ></img>
         </a>
 
         <a href="/?movie=Princess Mononoke">
-          <img src="movie3.png" alt="Princess Mononoke"></img>
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BNGIzY2IzODQtNThmMi00ZDE4LWI5YzAtNzNlZTM1ZjYyYjUyXkEyXkFqcGdeQXVyODEzNjM5OTQ@._V1_SX300.jpg"
+            alt="Princess Mononoke"
+          ></img>
         </a>
 
         <a href="/?movie=Castle in the Sky">
-          <img src="movie4.png" alt="Castle in the Sky"></img>
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BNTg0NmI1ZGQtZTUxNC00NTgxLThjMDUtZmRlYmEzM2MwOWYwXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg"
+            alt="Castle in the Sky"
+          ></img>
         </a>
       </section>
+
+      {movieStats && (
+        <MovieCard
+          engTitle={engTitle}
+          japTitle={japTitle}
+          description={description}
+          poster={poster}
+          ratings={ratings}
+        />
+      )}
     </main>
   );
 }
