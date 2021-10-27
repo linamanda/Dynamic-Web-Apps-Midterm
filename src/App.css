@@ -2,3 +2,69 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  background-color: #242429;
+}
+
+/* Home.js styles*/
+.Logo {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.MainContentWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
+.MainContentWrapper img {
+  height: 400px;
+  margin-bottom: 5%;
+  width: 250px;
+}
+
+/* MovieCard.js styles */
+.MovieCard {
+  background-color: #323340;
+  border-radius: 10px;
+  color: white;
+  display: grid;
+  grid-template-areas:
+    ". poster title title title title ."
+    ". poster desc desc desc desc ."
+    ". rating desc desc desc desc .";
+  margin: 5% 20%;
+  padding: 1%;
+}
+
+.TitleWrapper {
+  grid-area: title;
+  margin-left: 5%;
+  margin-top: 1%;
+}
+
+.Poster {
+  grid-area: poster;
+}
+
+.Description {
+  grid-area: desc;
+  margin-left: 5%;
+  margin-right: 9%;
+  margin-top: 10%;
+}
+
+.Ratings {
+  grid-area: rating;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-top: 5%;
+}

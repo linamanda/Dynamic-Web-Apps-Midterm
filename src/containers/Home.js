@@ -61,9 +61,9 @@ function Home() {
   });
 
   return (
-    <main>
-      <h1>GHIBLI MOVIES</h1>
-      <section>
+    <main className="App">
+      <h1 className="Logo">GHIBLI MOVIES</h1>
+      <section className="MainContentWrapper">
         <a href="/?movie=My Neighbor Totoro">
           <img
             src="https://m.media-amazon.com/images/M/MV5BYzJjMTYyMjQtZDI0My00ZjE2LTkyNGYtOTllNGQxNDMyZjE0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
@@ -85,10 +85,10 @@ function Home() {
           ></img>
         </a>
 
-        <a href="/?movie=Castle in the Sky">
+        <a href="/?movie=Tales from Earthsea">
           <img
-            src="https://m.media-amazon.com/images/M/MV5BNTg0NmI1ZGQtZTUxNC00NTgxLThjMDUtZmRlYmEzM2MwOWYwXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg"
-            alt="Castle in the Sky"
+            src="https://m.media-amazon.com/images/M/MV5BZGFlN2FhYTktZGYzNi00MzllLWFlOTAtY2ExNjRjZjhkZWM2XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+            alt="Tales From Earthsea"
           ></img>
         </a>
       </section>
