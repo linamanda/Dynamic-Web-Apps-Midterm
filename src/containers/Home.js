@@ -62,7 +62,9 @@ function Home() {
 
   return (
     <main className="App">
-      <h1 className="Logo">GHIBLI MOVIES</h1>
+      <h1 className="Logo">
+        <a href="/">GHIBLI MOVIES</a>
+      </h1>
       <section className="MainContentWrapper">
         <a href="/?movie=My Neighbor Totoro">
           <img
