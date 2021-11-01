@@ -50,7 +50,14 @@ function Home() {
   }, [omdbURL, originalTitle]);
 
   const { engTitle, japTitle, description, poster, ratings } = useMemo(() => {
-    if (!movieStats) return {};
+    if (!movieStats || !movieData)
+      return {
+        engTitle: "",
+        japTitle: "",
+        description: "",
+        poster: "",
+        ratings: [],
+      };
     return {
       engTitle: movieData[0].title,
       japTitle: movieData[0].original_title_romanised,
@@ -58,7 +65,7 @@ function Home() {
       poster: movieStats.Poster,
       ratings: movieStats.Ratings,
     };
-  });
+  }, [movieData, movieStats]);
 
   return (
     <main className="App">
